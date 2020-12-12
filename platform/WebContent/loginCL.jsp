@@ -46,7 +46,10 @@
 			  prestmt.setString(2, password);
 			  
 			  rs=prestmt.executeQuery();
-			  if(rs.next()) flag=true;
+			  if(rs.next()){
+				  flag=true;
+			      out.print("<script language='javascript'>alert('登录成功');window.location.href='student.jsp';</script>"); 
+			  }
 			  break;
 		  case "root":
 			  prestmt = conn.prepareStatement("select * from root where user_id=? and user_pw=?");
@@ -54,7 +57,10 @@
 			  prestmt.setString(2, password);
 			  
 			  rs=prestmt.executeQuery();
-			  if(rs.next()) flag=true;
+			  if(rs.next()){
+				  flag=true;
+				    out.print("<script language='javascript'>alert('登录成功');window.location.href='root.jsp';</script>"); 
+			  }
 			  break;
 		  case "review":
 			  prestmt = conn.prepareStatement("select * from review where user_id=? and user_pw=?");
@@ -62,7 +68,11 @@
 			  prestmt.setString(2, password);
 			  
 			  rs=prestmt.executeQuery();
-			  if(rs.next()) flag=true;
+			  if(rs.next()){
+				  flag=true;
+				    out.print("<script language='javascript'>alert('登录成功');window.location.href='review.jsp';</script>"); 
+
+			  }
 			  break;
 		  default:
 			  prestmt = conn.prepareStatement("select * from guidance where user_id=? and user_pw=?");
@@ -70,7 +80,10 @@
 			  prestmt.setString(2, password);
 			  
 			  rs=prestmt.executeQuery();
-			  if(rs.next()) flag=true;
+			  if(rs.next()){
+				  flag=true;
+				    out.print("<script language='javascript'>alert('登录成功');window.location.href='guidance.jsp';</script>"); 
+			  }
 		  }
 		  
 		  //关闭数据库连接
@@ -81,16 +94,14 @@
 	//out.println(type+" "+name+" "+password+" "+flag);
 	
 	//判断登陆界面的用户名和密码，根据输入的不同情况进行不同的处理
-    if(flag)
+    if(!flag)
 	{
 	//request.setAttribute("usertxt", "正常登录！！！");
 	//request.getRequestDispatcher("success.jsp").forward(request, response);
-    out.print("<script language='javascript'>alert('登录成功');window.location.href='success.jsp';</script>"); 
+    out.print("<script language='javascript'>alert('密码错误');window.location.href='login.jsp';</script>"); 
 
 	}
-	else{
-	out.print("<script language='javascript'>alert('密码错误');window.location.href='login.jsp';</script>"); 
-	} 
+	
 
 %>
 
